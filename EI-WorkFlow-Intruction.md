@@ -351,10 +351,105 @@
      -  `"reflection"`(Boolean): false，
      -  `"value"`(Object):
         - `"type"`(String): "generated",
-        - `"content"`: "",
-        - `"hint"`: ""
+        - `"content"`(String): "",
+        - `"hint"`(String): ""
 - `configs`(Object):
   -  `"template"`(String): ""
 
+### 节点：`Plugin`
+
+"Plugin"节点提供已构造好的插件能力。
+
+**属性：**
+
+- `"id"` (String): ""，
+- `"name"` (String): ""，
+- `"type"` (String): "Plugin"，
+- `"inputs"`(Array):
+  -  `_`(Object):
+     -  `"name"` (String): ""，
+     -  `"description"`(String): ""，
+     -  `"required"`(Boolean): true，
+     -  `"source"`(String): "user"，
+     -  `"reflection"`(Boolean): false，
+     -  `"value"`(Object):
+        - `"type"`(String): "ref",
+        - `"content"`(Object):
+           - `"ref_node_id"`(String): "",
+           - `"ref_var_name"`(String): "",
+           - `"source"`(String): "user"
+  -  `_`(Object):
+     -  `"name"` (String): ""，
+     -  `"description"`(String): ""，
+     -  `"required"`(Boolean): true，
+     -  `"source"`(String): "user"，
+     -  `"reflection"`(Boolean): false，
+     -  `"value"`(Object):
+        - `"type"`(String): "ref",
+        - `"content"`(Object):
+           - `"ref_node_id"`(String): "",
+           - `"ref_var_name"`(String): "",
+           - `"source"`(String): "user"
+- `"outputs"`(Array):
+  -  `_`(Object):
+     -  `"name"` (String): ""，
+     -  `"description"`(String): ""，
+     -  `"required"`(Boolean): true，
+     -  `"source"`(String): "user"，
+     -  `"reflection"`(Boolean): false，
+     -  `"value"`(Object):
+        - `"type"`(String): "generated"
+- `configs`(Object):
+  -  `"id"`(String): ""
+
+### 节点：`TaskFlow`
+
+"TaskFlow"节点提供任务规划能力。
+
+**属性：**
+
+- `"id"` (String): ""，
+- `"name"` (String): ""，
+- `"type"` (String): "Plugin"，
+- `"inputs"`(Array):
+  -  `_`(Object):
+     -  `"name"` (String): ""，
+     -  `"description"`(String): ""，
+     -  `"required"`(Boolean): false，
+     -  `"source"`(String): "user"，
+     -  `"value"`(Object):
+        - `"type"`(String): "ref",
+        - `"content"`(Object):
+           - `"ref_node_id"`(String): "",
+           - `"ref_var_name"`(String): "",
+           - `"source"`(String): "user"
+  -  `_`(Object):
+     -  `"name"` (String): ""，
+     -  `"description"`(String): ""，
+     -  `"required"`(Boolean): false，
+     -  `"source"`(String): "user"，
+     -  `"value"`(Object):
+        - `"type"`(String): "ref",
+        - `"content"`(Object):
+           - `"ref_node_id"`(String): "",
+           - `"ref_var_name"`(String): "",
+           - `"source"`(String): "user"
+- `"outputs"`(Array):
+  -  `_`(Object):
+     -  `"name"` (String): "results"，
+     -  `"description"`(String): ""，
+     -  `"required"`(Boolean): false，
+     -  `"source"`(String): "user"，
+     -  `"value"`(Object):
+        - `"type"`(String): "generated",
+        - `"content"`: null
+- `configs`(Object):
+  -  `"model"`(String): "",
+  -  `"prompt"`(String): "",
+  -  `"planner"`(String): "react",
+  -  `"plugins"`(Array):
+    -  `"id"`(String): "",
+    -  `"name"`(String): "",
+    -  `"description"`(String): ""
 
 ## 编排节点
