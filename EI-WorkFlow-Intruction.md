@@ -244,5 +244,33 @@
         - `"ref_node_id"`(String): "node_start",
         - `"ref_var_name"`(String): "query",
         - `"source"`(String): "system"
-
+- `"outputs"`(Array):
+  - `_`(Object):
+    - `"name"`(String): "result",
+    - `"description"`(String): "输出的分类分支名",
+    - `"required"`(Boolean): false,
+    - `"source"`(String): "system",
+    - `"reflection"`(Boolean): false
+    - `"value"`(Object):
+      - `"type"`(String): "generated",
+      - `"content"`(String): "",
+      - `"hint"`(String): ""
+- `"configs"`(Object):
+  - `"llm"`(Object):
+    - `"temperature"`(Number): 0.5,
+    - `"top_p"`(Number): 0.5,
+    - `"model"`(Object):
+      -  `"model_name"`(String): ""，
+      -  `"model_type"`(String): ""，
+      -  `"model_deployment_id"`(Sting): ""
+  - `"prompt"`(String): ""
+- `"branches"`(Array):
+  - `_`(Object):
+    - `"id"`(String): "branch_1",
+    - `"configs"`(Object):
+      - `"category"`(String): ""
+  - `_`(Object):
+    - `"id"`(String): "branch_2",
+    - `"configs"`(Object):
+      - `"category"`(String): ""
 ## 编排节点
