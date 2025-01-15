@@ -23,16 +23,16 @@
 - `outputs`(Array):
   -  (Object):
      -  `name` (String): "query"，
-     -  `type`(String):"string"，
-     -  `description`(String):"用户输入"，
-     -  `required`(Boolean):"true"，
-     -  `source`(String):"system"，
-     -  `field_type`(String):"input"，
-     -  `reflection`(Boolean):"false"，
+     -  `type`(String): "string"，
+     -  `description`(String): "用户输入"，
+     -  `required`(Boolean): true，
+     -  `source`(String): "system"，
+     -  `field_type`(String): "input"，
+     -  `reflection`(Boolean): false，
      -  `value`(Object):
-        - `type`(String):"literal",
-        - `content`(String):"",
-        - `hint`(String):"用户输入"
+        - `type`(String): "literal",
+        - `content`(String): "",
+        - `hint`(String): "用户输入"
   
 ### 节点：`node_default_llm_chain`
 
