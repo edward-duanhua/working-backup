@@ -18,22 +18,22 @@
 
 **属性：**
 
-- `id` (String): ""，
-- `name` (String): "开始"，
-- `type` (String): "Start"，
-- `outputs`(Array):
+- `"id"` (String): ""，
+- `"name"` (String): "开始"，
+- `"type"` (String): "Start"，
+- `"outputs"`(Array):
   -  `_`(Object):
-     -  `name` (String): "query"，
-     -  `type`(String): "string"，
-     -  `description`(String): "用户输入"，
-     -  `required`(Boolean): true，
-     -  `source`(String): "system"，
-     -  `field_type`(String): "input"，
-     -  `reflection`(Boolean): false，
-     -  `value`(Object):
-        - `type`(String): "literal",
-        - `content`(String): "",
-        - `hint`(String): "用户输入"
+     -  `"name"` (String): "query"，
+     -  `"type"`(String): "string"，
+     -  `"description"`(String): "用户输入"，
+     -  `"required"`(Boolean): true，
+     -  `"source"`(String): "system"，
+     -  `"field_type"`(String): "input"，
+     -  `"reflection"`(Boolean): false，
+     -  `"value"`(Object):
+        - `"type"`(String): "literal",
+        - `"content"`(String): "",
+        - `"hint"`(String): "用户输入"
   
 ### 节点：`LLM`
 
@@ -41,41 +41,41 @@
 
 **属性：**
 
-- `id` (String): ""，
-- `name` (String): "大模型"，
-- `type` (String): "LLM"，
-- `inputs`(Array):
+- `"id"` (String): ""，
+- `"name"` (String): "大模型"，
+- `"type"` (String): "LLM"，
+- `"inputs"`(Array):
   -  `_`(Object):
-     -  `name` (String): "query"，
-     -  `description`(String): ""，
-     -  `required`(Boolean): false，
-     -  `source`(String): "user"，
-     -  `reflection`(Boolean): false，
-     -  `value`(Object):
-        - `type`(String): "ref",
-        - `content`(Object):
-           - `ref_node_id`(String): "node_start",
-           - `ref_var_name`(String): "query",
-           - `source`(String): "system"
-- `outputs`(Array):
+     -  `"name"` (String): "query"，
+     -  `"description"`(String): ""，
+     -  `"required"`(Boolean): false，
+     -  `"source"`(String): "user"，
+     -  `"reflection"`(Boolean): false，
+     -  `"value"`(Object):
+        - `"type"`(String): "ref",
+        - `"content"`(Object):
+           - `"ref_node_id"`(String): "node_start",
+           - `"ref_var_name"`(String): "query",
+           - `"source"`(String): "system"
+- `"outputs"`(Array):
   -  `_`(Object):
-     -  `name` (String): "请输入"，
-     -  `type`(String): "string"，
-     -  `description`(String): "请输入"，
-     -  `required`(Boolean): false，
-     -  `source`(String): "user"，
-     -  `reflection`(Boolean): false，
-     -  `value`(Object):
-        - `type`(String): "generated"
+     -  `"name"` (String): "请输入"，
+     -  `"type"`(String): "string"，
+     -  `"description"`(String): "请输入"，
+     -  `"required"`(Boolean): false，
+     -  `"source"`(String): "user"，
+     -  `"reflection"`(Boolean): false，
+     -  `"value"`(Object):
+        - `"type"`(String): "generated"
 - `configs`(Object):
-  -  `top_p` (Number): 0.5，
-  -  `template_content`(String): "{{query}}"，
-  -  `temperature`(Number): 0.5，
-  -  `model`(Object): 
-     -  `model_name`(String): ""，
-     -  `model_type`(String): ""，
-     -  `model_deployment_id`(String): ""
-  - `enable_history`(Boolean): true
+  -  `"top_p"` (Number): 0.5，
+  -  `"template_content"`(String): "{{query}}"，
+  -  `"temperature"`(Number): 0.5，
+  -  `"model"`(Object): 
+     -  `"model_name"`(String): ""，
+     -  `"model_type"`(String): ""，
+     -  `"model_deployment_id"`(String): ""
+  - `"enable_history"`(Boolean): true
 
 ### 节点：`Questioner`
 
@@ -83,71 +83,71 @@
 
 **属性：**
 
-- `id` (String): ""，
-- `name` (String): ""，
-- `type` (String): "Questioner"，
-- `inputs`(Array):
+- `"id"` (String): ""，
+- `"name"` (String): ""，
+- `"type"` (String): "Questioner"，
+- `"inputs"`(Array):
   -  `_`(Object):
-     -  `name` (String): "提问器"，
-     -  `description`(String): ""，
-     -  `required`(Boolean): false，
-     -  `source`(String): "user"，
-     -  `reflection`(Boolean): false，
-     -  `value`(Object):
-        - `type`(String): "ref",
-        - `content`(Object):
-           - `ref_node_id`(String): "node_start",
-           - `ref_var_name`(String): "query",
-           - `source`(String): "system"
-- `outputs`(Array):
-  -  _(Object):
-     -  `name` (String): ""，
-     -  `cn_name`(String): ""，
-     -  `type`(String): "string"，
-     -  `description`(String): "用户最近一轮对话输入"，
-     -  `required`(Boolean): false，
-     -  `source`(String): "system"，
-     -  `reflection`(Boolean): false，
-     -  `value`(Object):
-        - `default`(String): "",
-        - `type`(String): "literal",
-        - `content`(String): "",
-        - `hint`(String): ""
+     -  `"name"` (String): "提问器"，
+     -  `"description"`(String): ""，
+     -  `"required"`(Boolean): false，
+     -  `"source"`(String): "user"，
+     -  `"reflection"`(Boolean): false，
+     -  `"value"`(Object):
+        - `"type"`(String): "ref",
+        - `"content"`(Object):
+           - `"ref_node_id"`(String): "node_start",
+           - `"ref_var_name"`(String): "query",
+           - `"source"`(String): "system"
+- `"outputs"`(Array):
+  -  `_`(Object):
+     -  `"name"` (String): ""，
+     -  `"cn_name"`(String): ""，
+     -  `"type"`(String): "string"，
+     -  `"description"`(String): "用户最近一轮对话输入"，
+     -  `"required"`(Boolean): false，
+     -  `"source"`(String): "system"，
+     -  `"reflection"`(Boolean): false，
+     -  `"value"`(Object):
+        - `"default"`(String): "",
+        - `"type"`(String): "literal",
+        - `"content"`(String): "",
+        - `"hint"`(String): ""
+     -  `"validator"`(Array):
+        -  `_`(Object):
+           -  `"type"`(String): "date_time_format",
+           -  `"params"`(Array): ""
+              -  `_`(String): "%Y-%m-%d %H:%M"
+  -  `_`(Object):
+     -  `"name"` (String): ""，
+     -  `"cn_name"`(String): ""，
+     -  `"type"`(String): "string"，
+     -  `"description"`(String): ""，
+     -  `"required"`(Boolean): false，
+     -  `"source"`(String): "user"，
+     -  `"reflection"`(Boolean): false，
+     -  `"value"`(Object):
+        - `"default"`(String): "",
+        - `"type"`(String): "generated",
+        - `"content"`(String): "",
+        - `"hint"`(String): ""
      -  `validator`(Array):
         -  `_`(Object):
-           -  `type`(String): "date_time_format",
-           -  `params`(Array): ""
-              -  _(String): "%Y-%m-%d %H:%M"
-  -  _(Object):
-     -  `name` (String): ""，
-     -  `cn_name`(String): ""，
-     -  `type`(String): "string"，
-     -  `description`(String): ""，
-     -  `required`(Boolean): false，
-     -  `source`(String): "user"，
-     -  `reflection`(Boolean): false，
-     -  `value`(Object):
-        - `default`(String): "",
-        - `type`(String): "generated",
-        - `content`(String): "",
-        - `hint`(String): ""
-     -  `validator`(Array):
-        -  `_`(Object):
-           -  `type`(String): "date_time_format",
-           -  `params`(Array): 
-              -  _(String): "%Y-%m-%d %H:%M" 
+           -  `"type"`(String): "date_time_format",
+           -  `"params"`(Array): 
+              -  `_`(String): "%Y-%m-%d %H:%M" 
 - `configs`(Object):
-  -  `top_p` (Number): 0.5，
-  -  `extract_fields_from_response`(Boolean): true,
-  -  `with_chat_history`(Boolean): true,
-  -  `extra_prompt_for_fields_extraction`(String): "如果用户发起修改，只改用户修改的变量，不修改的保持原样",
-  -  `temperature`(Number): 0.2，
-  -  `max_response`(Number): 3,
-  -  `question_content`(String): "",
-  -  `model`(Object): 
-     -  `model_name`(String): ""，
-     -  `model_type`(String): ""，
-     -  `model_deployment_id`(Sting): ""
+  -  `"top_p"` (Number): 0.5，
+  -  `"extract_fields_from_response"`(Boolean): true,
+  -  `"with_chat_history"`(Boolean): true,
+  -  `"extra_prompt_for_fields_extraction"`(String): "如果用户发起修改，只改用户修改的变量，不修改的保持原样",
+  -  `"temperature"`(Number): 0.2，
+  -  `"max_response"`(Number): 3,
+  -  `"question_content"`(String): "",
+  -  `"model"`(Object): 
+     -  `"model_name"`(String): ""，
+     -  `"model_type"`(String): ""，
+     -  `"model_deployment_id"`(Sting): ""
 
 ### 节点：`Code`
 
@@ -156,31 +156,31 @@
 
 **属性：**
 
-- `id` (String): ""，
-- `name` (String): "代码"，
-- `type` (String): "Code"，
-- `inputs`(Array):
+- `"id"` (String): ""，
+- `"name"` (String): "代码"，
+- `"type"` (String): "Code"，
+- `"inputs"`(Array):
   -  `_`(Object):
-     -  `name` (String): ""，
-     -  `type`(String): "string"，
-     -  `description`(String): ""，
-     -  `required`(Boolean): false，
-     -  `source`(String): "user"，
-     -  `reflection`(Boolean): false，
-     -  `value`(Object):
-        - `type`(String): "generated"
-- `outputs`(Array):
+     -  `"name"` (String): ""，
+     -  `"type"`(String): "string"，
+     -  `"description"`(String): ""，
+     -  `"required"`(Boolean): false，
+     -  `"source"`(String): "user"，
+     -  `"reflection"`(Boolean): false，
+     -  `"value"`(Object):
+        - `"type"`(String): "generated"
+- `"outputs"`(Array):
   -  `_`(Object):
-     -  `name` (String): ""，
-     -  `type`(String): "string"，
-     -  `description`(String): ""，
-     -  `required`(Boolean): false，
-     -  `source`(String): "user"，
-     -  `reflection`(Boolean): false，
-     -  `value`(Object):
-        - `type`(String): "generated"
-- `configs`(Object):
-  -  `code` (String): ""
+     -  `"name"` (String): ""，
+     -  `"type"`(String): "string"，
+     -  `"description"`(String): ""，
+     -  `"required"`(Boolean): false，
+     -  `"source"`(String): "user"，
+     -  `"reflection"`(Boolean): false，
+     -  `"value"`(Object):
+        - `"type"`(String): "generated"
+- `"configs"`(Object):
+  -  `"code"` (String): ""
 
 ### 节点：`Branch`
 
@@ -188,39 +188,61 @@
 
 **属性：**
 
-- `id` (String): ""，
-- `name` (String): "判断"，
-- `type` (String): "Branch"，
-- `branches`(Array):
+- `"id"` (String): ""，
+- `"name"` (String): "判断"，
+- `"type"` (String): "Branch"，
+- `"branches"`(Array):
    - `_`(Object):
-     - `id`(String): "if",
-     - `configs`(Object):
-       - `logic`(String): "and",
-       - `conditions`(Array):
+     - `"id"`(String): "if",
+     - `"configs"`(Object):
+       - `"logic"`(String): "and",
+       - `"conditions"`(Array):
          - `_`(Object):
-           - `operator`(String): "eq",
-           - `left`(Object):
-             - `name`(String): "",
-             - `description`: "",
-             - `required`(Boolean): false,
-             - `source`(String): "user",
-             - `value`(Object):
-               - `type`(String): "ref",
-               - `content`(Object):
-                 - `ref_node_id`(String): "",
-                 - `ref_var_name`(String): "continue",
-                 - `source`(String): "user"
-           - `right`(Object):
-             - `name`(String): "",
-             - `description`: "",
-             - `required`(Boolean): false,
-             - `source`(String): "user",
-             - `value`(Object):
-               - `type`(String): "literal",
-               - `content`(String): "Y",
-               - `hint`(String): ""
+           - `"operator"`(String): "eq",
+           - `"left"`(Object):
+             - `"name"`(String): "",
+             - `"description"`: "",
+             - `"required"`(Boolean): false,
+             - `"source"`(String): "user",
+             - `"value"`(Object):
+               - `"type"`(String): "ref",
+               - `"content"`(Object):
+                 - `"ref_node_id"`(String): "",
+                 - `"ref_var_name"`(String): "continue",
+                 - `"source"`(String): "user"
+           - `"right"`(Object):
+             - `"name"`(String): "",
+             - `"description"`: "",
+             - `"required"`(Boolean): false,
+             - `"source"`(String): "user",
+             - `"value"`(Object):
+               - `"type"`(String): "literal",
+               - `"content"`(String): "Y",
+               - `"hint"`(String): ""
    - _(Object):
-     - `id`(String): "default"
+     - `"id"`(String): "default"
 
+### 节点：`IntentDetection`
+
+"IntentDetection"节点通过定义分类描述，问题分类器能够根据用户输入，使用 LLM 推理与之相匹配的分类并输出分类结果，向下游节点提供更加精确的信息。
+
+**属性：**
+
+- `"id"` (String): ""，
+- `"name"` (String): "意图分类"，
+- `"type"` (String): "IntentDetection"，
+- `"inputs"`(Array):
+  - `_`(Object):
+    - `"name"`(String): "input",
+    - `"description"`(String): "",
+    - `"required"`(Boolean): false,
+    - `"source"`(String): "user",
+    - `"reflection"`(Boolean): false
+    - `"value"`(Object):
+      - `"type"`(String): "ref",
+      - `"content"`(Object):
+        - `"ref_node_id"`(String): "node_start",
+        - `"ref_var_name"`(String): "query",
+        - `"source"`(String): "system"
 
 ## 编排节点
