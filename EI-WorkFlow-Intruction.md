@@ -74,7 +74,7 @@
   -  `model`(Object): 
      -  `model_name`(String): ""，
      -  `model_type`(String): ""，
-     -  `model_deployment_id`(Sting): ""
+     -  `model_deployment_id`(String): ""
   - `enable_history`(Boolean): true
 
 ### 节点：`Questioner`
@@ -134,16 +134,20 @@
      -  `validator`(Array):
         -  _(Object):
            -  `type`(String): "date_time_format",
-           -  `params`(Array): ""
+           -  `params`(Array): 
               -  _(String): "%Y-%m-%d %H:%M" 
 - `configs`(Object):
   -  `top_p` (Number): 0.5，
-  -  `template_content`(String): "{{query}}"，
-  -  `temperature`(Number): 0.5，
+  -  `extract_fields_from_response`(Boolean): true,
+  -  `with_chat_history`(Boolean): true,
+  -  `extra_prompt_for_fields_extraction`(String): "如果用户发起修改，只改用户修改的变量，不修改的保持原样",
+  -  `temperature`(Number): 0.2，
+  -  `max_response`(Number): 5,
+  -  `question_content`(String): "",
   -  `model`(Object): 
      -  `model_name`(String): ""，
      -  `model_type`(String): ""，
      -  `model_deployment_id`(Sting): ""
-  - `enable_history`(Boolean): true
+
 
 ## 编排节点
