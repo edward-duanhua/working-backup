@@ -273,4 +273,44 @@
     - `"id"`(String): "branch_2",
     - `"configs"`(Object):
       - `"category"`(String): ""
+
+### 节点：`End`
+
+"End"节点定义一个工作流程结束的最终输出内容。每一个工作流在完整执行后都需要至少一个结束节点，用于输出完整执行的最终结果。
+结束节点为流程终止节点，后面无法再添加其他节点，工作流应用中只有运行到结束节点才会输出执行结果。若流程中出现条件分叉，则需要定义多个结束节点。
+结束节点需要声明一个或多个输出变量，声明时可以引用任意上游节点的输出变量。
+
+**属性：**
+
+- `"id"` (String): ""，
+- `"name"` (String): "结束"，
+- `"type"` (String): "End"，
+- `"inputs"`(Array):
+  -  `_`(Object):
+     -  `"name"` (String): ""，
+     -  `"description"`(String): ""，
+     -  `"required"`(Boolean): false，
+     -  `"source"`(String): "user"，
+     -  `"reflection"`(Boolean): false，
+     -  `"value"`(Object):
+        - `"type"`(String): "ref",
+        - `"content"`(Object):
+           - `"ref_node_id"`(String): "",
+           - `"ref_var_name"`(String): "",
+           - `"source"`(String): "user"
+- `"outputs"`(Array):
+  -  `_`(Object):
+     -  `"name"` (String): "response_content"，
+     -  `"type"`(String): "string"，
+     -  `"description"`(String): "最终输出"，
+     -  `"required"`(Boolean): true，
+     -  `"source"`(String): "system"，
+     -  `"reflection"`(Boolean): false，
+     -  `"value"`(Object):
+        - `"type"`(String): "generated"
+- `configs`(Object):
+  -  `"is_stream_out"` (String): "true"，
+  -  `"response_template"`(String): "",
+  -  `"response_mode"`(String): "directResponse"
+
 ## 编排节点
