@@ -12,4 +12,66 @@
 ## 变量
 
 ## 节点说明
+### 节点：`node_start`
+
+"开始" 节点是每个工作流应用（Chatflow / Workflow）必备的预设节点，为后续工作流节点以及应用的正常流转提供必要的初始信息，例如应用使用者所输入的内容
+
+**属性：**
+
+- `name` (String): "开始"，
+- `type` (String): "Start"，
+- `outputs`(Array):
+  -  (Object):
+     -  `name` (String): "query"，
+     -  `type`(String):"string"，
+     -  `description`(String):"用户输入"，
+     -  `required`(Boolean):"true"，
+     -  `source`(String):"system"，
+     -  `field_type`(String):"input"，
+     -  `reflection`(Boolean):"false"，
+     -  `value`(Object):
+        - `type`(String):"literal",
+        - `content`(String):"",
+        - `hint`(String):"用户输入"
+  
+### 节点：`node_default_llm_chain`
+
+调用大语言模型的能力，处理用户输入的信息（自然语言、上传的文件或图片），给出有效的回应信息。
+
+**属性：**
+
+- `name` (String): "大模型"，
+- `type` (String): "LLM"，
+- `inputs`(Array):
+  -  (Object):
+     -  `name` (String): "query"，
+     -  `description`(String): ""，
+     -  `required`(Boolean): false，
+     -  `source`(String): "user"，
+     -  `reflection`(Boolean): false，
+     -  `value`(Object):
+        - `type`(String): "ref",
+        - `content`(Object):
+           - `ref_node_id`(String): "node_start",
+           - `ref_var_name`(String): "query",
+           - `source`(String): "system"
+- `outputs`(Array):
+  -  (Object):
+     -  `name` (String): "raw_output"，
+     -  `type`(String): "string"，
+     -  `description`(String): "该节点原始输出"，
+     -  `required`(Boolean): false，
+     -  `source`(String): "user"，
+     -  `reflection`(Boolean): false，
+     -  `value`(Object):
+        - `type`(String): "generated"
+- `configs`(Object):
+  -  `top_p` (Number): 0.5，
+  -  `template_content`(String): "{{query}}"，
+  -  `temperature`(Number): 0.5，
+  -  `model`(Object): 
+     -  `model_name`(String): ""，
+     -  `model_type`(String): ""，
+     -  `model_deployment_id`(Sting): ""
+  - `enable_history`(Boolean): true
 ## 编排节点
