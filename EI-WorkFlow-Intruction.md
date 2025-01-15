@@ -12,7 +12,8 @@
 ## 变量
 
 ## 节点说明
-下面每个节点的属性描述中，括号中的String、Array、Boolean、Object、Number分别对应jsonl文件支持的4种数据类型，用于表明括号前的字段的数据类型，且字段间通过层次关系表示它们间的从属。
+每个节点的属性描述中，括号中的String、Array、Boolean、Object、Number分别对应jsonl文件支持的4种数据类型，用于表明括号前的字段的数据类型，且字段间通过层次关系表示它们间的从属。
+每个节点的`"id"`字段的取值必须确保唯一，格式参考"node_1733731697635"，以"node_"开头，后面是13位数字。
 ### 节点：`Start`
 
 "开始" 节点是每个工作流应用（Chatflow / Workflow）必备的预设节点，为后续工作流节点以及应用的正常流转提供必要的初始信息，例如应用使用者所输入的内容。
@@ -316,5 +317,44 @@
   -  `"is_stream_out"` (String): "true"，
   -  `"response_template"`(String): "",
   -  `"response_mode"`(String): "directResponse"
+
+### 节点：`Message`
+
+"Message"节点支持返回执行过程中间结果。
+
+**属性：**
+
+- `"id"` (String): ""，
+- `"name"` (String): "消息"，
+- `"type"` (String): "Message"，
+- `"inputs"`(Array):
+  -  `_`(Object):
+     -  `"name"` (String): "input"，
+     -  `"description"`(String): ""，
+     -  `"required"`(Boolean): true，
+     -  `"source"`(String): "user"，
+     -  `"reflection"`(Boolean): false，
+     -  `"value"`(Object):
+        - `"type"`(String): "ref",
+        - `"content"`(Object):
+           - `"ref_node_id"`(String): "",
+           - `"ref_var_name"`(String): "",
+           - `"source"`(String): "user"
+        - `"hint"`(String): ""
+- `"outputs"`(Array):
+  -  `_`(Object):
+     -  `"name"` (String): "result"，
+     -  `"type"`(String): "string"，
+     -  `"description"`(String): "消息输出"，
+     -  `"required"`(Boolean): false，
+     -  `"source"`(String): "system"，
+     -  `"reflection"`(Boolean): false，
+     -  `"value"`(Object):
+        - `"type"`(String): "generated",
+        - `"content"`: "",
+        - `"hint"`: ""
+- `configs`(Object):
+  -  `"template"`(String): ""
+
 
 ## 编排节点
