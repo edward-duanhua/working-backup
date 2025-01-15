@@ -22,7 +22,7 @@
 - `name` (String): "开始"，
 - `type` (String): "Start"，
 - `outputs`(Array):
-  -  _(Object):
+  -  `_`(Object):
      -  `name` (String): "query"，
      -  `type`(String): "string"，
      -  `description`(String): "用户输入"，
@@ -45,7 +45,7 @@
 - `name` (String): "大模型"，
 - `type` (String): "LLM"，
 - `inputs`(Array):
-  -  _(Object):
+  -  `_`(Object):
      -  `name` (String): "query"，
      -  `description`(String): ""，
      -  `required`(Boolean): false，
@@ -58,7 +58,7 @@
            - `ref_var_name`(String): "query",
            - `source`(String): "system"
 - `outputs`(Array):
-  -  _(Object):
+  -  `_`(Object):
      -  `name` (String): "请输入"，
      -  `type`(String): "string"，
      -  `description`(String): "请输入"，
@@ -87,7 +87,7 @@
 - `name` (String): ""，
 - `type` (String): "Questioner"，
 - `inputs`(Array):
-  -  _(Object):
+  -  `_`(Object):
      -  `name` (String): "提问器"，
      -  `description`(String): ""，
      -  `required`(Boolean): false，
@@ -114,7 +114,7 @@
         - `content`(String): "",
         - `hint`(String): ""
      -  `validator`(Array):
-        -  _(Object):
+        -  `_`(Object):
            -  `type`(String): "date_time_format",
            -  `params`(Array): ""
               -  _(String): "%Y-%m-%d %H:%M"
@@ -132,7 +132,7 @@
         - `content`(String): "",
         - `hint`(String): ""
      -  `validator`(Array):
-        -  _(Object):
+        -  `_`(Object):
            -  `type`(String): "date_time_format",
            -  `params`(Array): 
               -  _(String): "%Y-%m-%d %H:%M" 
@@ -142,12 +142,85 @@
   -  `with_chat_history`(Boolean): true,
   -  `extra_prompt_for_fields_extraction`(String): "如果用户发起修改，只改用户修改的变量，不修改的保持原样",
   -  `temperature`(Number): 0.2，
-  -  `max_response`(Number): 5,
+  -  `max_response`(Number): 3,
   -  `question_content`(String): "",
   -  `model`(Object): 
      -  `model_name`(String): ""，
      -  `model_type`(String): ""，
      -  `model_deployment_id`(Sting): ""
+
+### 节点：`Code`
+
+"Code"节点支持运行 Python 代码以在工作流程中执行数据转换。它可以简化你的工作流程，适用于Arithmetic、JSON transform、文本处理等情景。
+该节点极大地增强了开发人员的灵活性，使他们能够在工作流程中嵌入自定义的 Python 脚本，并以预设节点无法达到的方式操作变量。
+
+**属性：**
+
+- `id` (String): ""，
+- `name` (String): "代码"，
+- `type` (String): "Code"，
+- `inputs`(Array):
+  -  `_`(Object):
+     -  `name` (String): ""，
+     -  `type`(String): "string"，
+     -  `description`(String): ""，
+     -  `required`(Boolean): false，
+     -  `source`(String): "user"，
+     -  `reflection`(Boolean): false，
+     -  `value`(Object):
+        - `type`(String): "generated"
+- `outputs`(Array):
+  -  `_`(Object):
+     -  `name` (String): ""，
+     -  `type`(String): "string"，
+     -  `description`(String): ""，
+     -  `required`(Boolean): false，
+     -  `source`(String): "user"，
+     -  `reflection`(Boolean): false，
+     -  `value`(Object):
+        - `type`(String): "generated"
+- `configs`(Object):
+  -  `code` (String): ""
+
+### 节点：`Branch`
+
+"Branch"节点用于设置工作流中的分支流程，根据 If/else/elif 条件将 Chatflow / Workflow 流程拆分成多个分支。
+
+**属性：**
+
+- `id` (String): ""，
+- `name` (String): "判断"，
+- `type` (String): "Branch"，
+- `branches`(Array):
+   - `_`(Object):
+     - `id`(String): "if",
+     - `configs`(Object):
+       - `logic`(String): "and",
+       - `conditions`(Array):
+         - `_`(Object):
+           - `operator`(String): "eq",
+           - `left`(Object):
+             - `name`(String): "",
+             - `description`: "",
+             - `required`(Boolean): false,
+             - `source`(String): "user",
+             - `value`(Object):
+               - `type`(String): "ref",
+               - `content`(Object):
+                 - `ref_node_id`(String): "",
+                 - `ref_var_name`(String): "continue",
+                 - `source`(String): "user"
+           - `right`(Object):
+             - `name`(String): "",
+             - `description`: "",
+             - `required`(Boolean): false,
+             - `source`(String): "user",
+             - `value`(Object):
+               - `type`(String): "literal",
+               - `content`(String): "Y",
+               - `hint`(String): ""
+   - _(Object):
+     - `id`(String): "default"
 
 
 ## 编排节点
