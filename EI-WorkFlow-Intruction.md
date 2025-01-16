@@ -628,7 +628,47 @@ ModelArts工作流的核心节点请查看 《节点说明》。
 **参考样例**
 
 ```python
-
+{
+	"id": "node_1733450716936",
+	"name": "消息",
+	"type": "Message",
+	"inputs": [
+		{
+			"name": "input",
+			"description": "",
+			"required": true,
+			"source": "user",
+			"reflection": false,
+			"value": {
+				"type": "ref",
+				"content": {
+					"ref_node_id": "node_1733450861668",
+					"ref_var_name": "name",
+					"source": "user"
+				},
+				"hint": ""
+			}
+		}
+	],
+	"outputs": [
+		{
+			"name": "result",
+			"type": "string",
+			"description": "消息输出",
+			"required": false,
+			"source": "system",
+			"reflection": false,
+			"value": {
+				"type": "generated",
+				"content": "",
+				"hint": ""
+			}
+		}
+	],
+	"configs": {
+		"template": "这个姓名有问题：{{input}}"
+	}
+}
 ```
 
 ### 节点：`Plugin`
