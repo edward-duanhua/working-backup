@@ -12,14 +12,17 @@
 ## 变量
 
 ## 节点说明
-每个节点的属性描述中，括号中的String、Array、Boolean、Object、Number分别对应jsonl文件支持的4种数据类型，用于表明括号前的字段的数据类型，且字段间通过层次关系表示它们间的从属。
+每个节点都是json格式，其属性描述中，括号中的String、Array、Boolean、Object、Number分别对应jsonl文件支持的4种数据类型，用于表明括号前的字段的数据类型，且字段间通过层次关系表示它们间的主从。
 每个节点的`"id"`字段的取值必须确保唯一，格式参考"node_1733731697635"，以"node_"开头，后面是13位数字。
+在有些场景下，节点中的`"inputs"`和`"outputs"`都可能会包含多个Object对象。
+节点中的各字段的实际取值需要根据工作流设置，下面给出的是一些样例。
+
 ### 节点：`Start`
 
 "开始" 节点是每个工作流应用（Chatflow / Workflow）必备的预设节点，为后续工作流节点以及应用的正常流转提供必要的初始信息，例如应用使用者所输入的内容。
 实际应用中有几点需要注意：
 
-- 在有些场景下`"outputs"`中可能包含多个Object对象
+- 在有些场景下`"inputs"`和`"outputs"`中都可能会包含多个Object对象
 
 **属性：**
 
@@ -279,45 +282,6 @@
     - `"configs"`(Object):
       - `"category"`(String): ""
 
-### 节点：`End`
-
-"End"节点定义一个工作流程结束的最终输出内容。每一个工作流在完整执行后都需要至少一个结束节点，用于输出完整执行的最终结果。
-结束节点为流程终止节点，后面无法再添加其他节点，工作流应用中只有运行到结束节点才会输出执行结果。若流程中出现条件分叉，则需要定义多个结束节点。
-结束节点需要声明一个或多个输出变量，声明时可以引用任意上游节点的输出变量。
-
-**属性：**
-
-- `"id"` (String): ""，
-- `"name"` (String): "结束"，
-- `"type"` (String): "End"，
-- `"inputs"`(Array):
-  -  `_`(Object):
-     -  `"name"` (String): ""，
-     -  `"description"`(String): ""，
-     -  `"required"`(Boolean): false，
-     -  `"source"`(String): "user"，
-     -  `"reflection"`(Boolean): false，
-     -  `"value"`(Object):
-        - `"type"`(String): "ref",
-        - `"content"`(Object):
-           - `"ref_node_id"`(String): "",
-           - `"ref_var_name"`(String): "",
-           - `"source"`(String): "user"
-- `"outputs"`(Array):
-  -  `_`(Object):
-     -  `"name"` (String): "response_content"，
-     -  `"type"`(String): "string"，
-     -  `"description"`(String): "最终输出"，
-     -  `"required"`(Boolean): true，
-     -  `"source"`(String): "system"，
-     -  `"reflection"`(Boolean): false，
-     -  `"value"`(Object):
-        - `"type"`(String): "generated"
-- `configs`(Object):
-  -  `"is_stream_out"` (String): "true"，
-  -  `"response_template"`(String): "",
-  -  `"response_mode"`(String): "directResponse"
-
 ### 节点：`Message`
 
 "Message"节点支持返回执行过程中间结果。
@@ -452,4 +416,49 @@
     -  `"name"`(String): "",
     -  `"description"`(String): ""
 
+### 节点：`End`
+
+"End"节点定义一个工作流程结束的最终输出内容。每一个工作流在完整执行后都需要至少一个结束节点，用于输出完整执行的最终结果。
+结束节点为流程终止节点，后面无法再添加其他节点，工作流应用中只有运行到结束节点才会输出执行结果。若流程中出现条件分叉，则需要定义多个结束节点。
+结束节点需要声明一个或多个输出变量，声明时可以引用任意上游节点的输出变量。
+
+**属性：**
+
+- `"id"` (String): ""，
+- `"name"` (String): "结束"，
+- `"type"` (String): "End"，
+- `"inputs"`(Array):
+  -  `_`(Object):
+     -  `"name"` (String): ""，
+     -  `"description"`(String): ""，
+     -  `"required"`(Boolean): false，
+     -  `"source"`(String): "user"，
+     -  `"reflection"`(Boolean): false，
+     -  `"value"`(Object):
+        - `"type"`(String): "ref",
+        - `"content"`(Object):
+           - `"ref_node_id"`(String): "",
+           - `"ref_var_name"`(String): "",
+           - `"source"`(String): "user"
+- `"outputs"`(Array):
+  -  `_`(Object):
+     -  `"name"` (String): "response_content"，
+     -  `"type"`(String): "string"，
+     -  `"description"`(String): "最终输出"，
+     -  `"required"`(Boolean): true，
+     -  `"source"`(String): "system"，
+     -  `"reflection"`(Boolean): false，
+     -  `"value"`(Object):
+        - `"type"`(String): "generated"
+- `configs`(Object):
+  -  `"is_stream_out"` (String): "true"，
+  -  `"response_template"`(String): "",
+  -  `"response_mode"`(String): "directResponse"
+
+
 ## 编排节点
+Workflow内的节点支持串行和并行的连接模式。
+
+### 串行设计
+该结构要求节点按照预设顺序依次执行，每个节点需等待前一个节点完成并输出结果后才能开始工作，有助于**确保任务按照逻辑顺序执行。**
+例如
