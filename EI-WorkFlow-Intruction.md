@@ -23,10 +23,10 @@
 
 ### 节点：`Start`
 
-"开始" 节点是每个ModelArts工作流应用（Chatflow / Workflow）必备的预设节点，为后续工作流节点以及应用的正常流转提供必要的初始信息，例如应用使用者所输入的内容。
+"开始" 节点是每个工作流应用（Chatflow / Workflow）必备的预设节点，为后续工作流节点以及应用的正常流转提供必要的初始信息，例如应用使用者所输入的内容。
 实际应用中有几点需要注意：
 
-- 在有些场景下`"inputs"`和`"outputs"`中都可能会包含多个Object对象
+- 在有些场景下`"inputs"`和`"outputs"`中都可能包含多个Object对象
 
 **属性：**
 
@@ -46,6 +46,32 @@
         - `"type"`(String): "literal",
         - `"content"`(String): "",
         - `"hint"`(String): "用户输入"
+
+**参考样例**
+
+```python
+	{
+        "id": "node_start",
+        "name": "开始",
+        "type": "Start",
+        "outputs": [
+          {
+            "name": "query",
+            "type": "string",
+            "description": "用户输入",
+            "required": true,
+            "source": "system",
+            "field_type": "input",
+            "reflection": false,
+            "value": {
+              "type": "literal",
+              "content": "",
+              "hint": "用户输入"
+            }
+          }
+        ]
+      }
+```
   
 ### 节点：`LLM`
 
@@ -88,6 +114,57 @@
      -  `"model_type"`(String): ""，
      -  `"model_deployment_id"`(String): ""
   - `"enable_history"`(Boolean): true
+
+**参考样例**
+
+```python
+	{
+        "id": "node_default_llm_chain",
+        "name": "大模型",
+        "type": "LLM",
+        "inputs": [
+          {
+            "name": "query",
+            "description": "",
+            "required": false,
+            "source": "user",
+            "reflection": false,
+            "value": {
+              "type": "ref",
+              "content": {
+                "ref_node_id": "node_start",
+                "ref_var_name": "query",
+                "source": "system"
+              }
+            }
+          }
+        ],
+        "outputs": [
+          {
+            "name": "raw_output",
+            "type": "string",
+            "description": "该节点原始输出",
+            "required": false,
+            "source": "user",
+            "reflection": false,
+            "value": {
+              "type": "generated"
+            }
+          }
+        ],
+        "configs": {
+          "top_p": 0.5,
+          "template_content": "{{query}}",
+          "temperature": 0.5,
+          "model": {
+            "model_name": "xw-n1-128k-402-部署-121201",
+            "model_type": "ei_pangu",
+            "model_deployment_id": "6acb6f59-0f29-4a76-aada-431cb2246208"
+          },
+          "enable_history": true
+        }
+    }
+```
 
 ### 节点：`Questioner`
 
@@ -161,6 +238,64 @@
      -  `"model_type"`(String): ""，
      -  `"model_deployment_id"`(Sting): ""
 
+
+**参考样例**
+
+```python
+	{
+        "id": "node_1734596963300",
+        "name": "是否继续券额预估模型建群",
+        "type": "Questioner",
+        "inputs": [],
+        "outputs": [
+          {
+            "name": "user_response",
+            "cn_name": "",
+            "type": "string",
+            "description": "用户最近一轮对话输入",
+            "required": false,
+            "source": "system",
+            "reflection": false,
+            "value": {
+              "default": "",
+              "type": "literal",
+              "content": "",
+              "hint": ""
+            },
+            "validator": []
+          },
+          {
+            "name": "continue",
+            "cn_name": "是否继续",
+            "type": "string",
+            "description": "目标数据的用户输入中是否体现用户是否继续的意图，如果用户表示继续意图（如OK、好的、嗯）或肯定意图（如对、正确）时，该变量值为Y，如果用户表示不再继续、修改建群需求、否定意图（如不对、不正确、不好等）时，该变量值为N；如果目标数据不包含用户输入或不体现是否继续的意图，该变量值置空",
+            "required": true,
+            "source": "user",
+            "reflection": false,
+            "value": {
+              "default": "",
+              "type": "generated",
+              "hint": ""
+            },
+            "validator": []
+          }
+        ],
+        "configs": {
+          "top_p": 0.5,
+          "extract_fields_from_response": true,
+          "with_chat_history": true,
+          "temperature": 0.2,
+          "max_response": 3,
+          "question_content": "即将创建券额预估模型客群，建群原理：\n对于不同运营场使用不同的模型组合以及专家规则圈选高价值人群，然后根据运营人员录入的预算，再结合领券意向、消费意向等模型对高价值人群进行精筛,创建满足业务预算上限的客群，再通过券额成本预估模型预测最优发放金额。 \n是否需要建群？",
+          "model": {
+            "model_name": "xw-n1-128k-402-部署-121201",
+            "model_type": "ei_pangu",
+            "model_deployment_id": "6acb6f59-0f29-4a76-aada-431cb2246208"
+          }
+        }
+    }
+```
+
 ### 节点：`Code`
 
 "Code"节点支持运行 Python 代码以在工作流程中执行数据转换。它可以简化你的工作流程，适用于Arithmetic、JSON transform、文本处理等情景。
@@ -194,9 +329,36 @@
 - `"configs"`(Object):
   -  `"code"` (String): ""
 
+**参考样例**
+
+```python
+	{
+        "id": "node_1733477983207",
+        "name": "代码",
+        "type": "Code",
+        "inputs": [],
+        "outputs": [
+          {
+            "name": "key1",
+            "type": "string",
+            "description": "输出",
+            "required": false,
+            "source": "user",
+            "reflection": false,
+            "value": {
+              "type": "generated"
+            }
+          }
+        ],
+        "configs": {
+          "code": "def main(args: dict) -> dict:\n    ret = {\n        \"key0\": args.get('input', 'default'),\n        \"key1\": \"hi\"\n    }\n    return ret"
+        }
+    }
+```
+
 ### 节点：`Branch`
 
-"Branch"节点用于设置ModelArts工作流中的分支流程，根据 If/else/elif 条件将 Chatflow / Workflow 流程拆分成多个分支。
+"Branch"节点用于设置工作流中的分支流程，根据 If/else/elif 条件将 Chatflow / Workflow 流程拆分成多个分支。
 
 **属性：**
 
@@ -233,6 +395,57 @@
                - `"hint"`(String): ""
    - _(Object):
      - `"id"`(String): "default"
+
+**参考样例**
+
+```python
+	{
+        "id": "node_1734597323899",
+        "name": "判断",
+        "type": "Branch",
+        "branches": [
+          {
+            "id": "if",
+            "configs": {
+              "logic": "and",
+              "conditions": [
+                {
+                  "operator": "eq",
+                  "left": {
+                    "name": "",
+                    "description": "",
+                    "required": false,
+                    "source": "user",
+                    "value": {
+                      "type": "ref",
+                      "content": {
+                        "ref_node_id": "node_1734596963300",
+                        "ref_var_name": "continue",
+                        "source": "user"
+                      }
+                    }
+                  },
+                  "right": {
+                    "name": "",
+                    "description": "",
+                    "required": false,
+                    "source": "user",
+                    "value": {
+                      "type": "literal",
+                      "content": "Y",
+                      "hint": ""
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "default"
+          }
+        ]
+    }
+```
 
 ### 节点：`IntentDetection`
 
@@ -286,9 +499,102 @@
     - `"configs"`(Object):
       - `"category"`(String): ""
 
+
+**参考样例**
+
+```python
+	{
+        "id": "node_1733476738596",
+        "name": "意图分类",
+        "type": "IntentDetection",
+        "inputs": [
+          {
+            "name": "input",
+            "description": "",
+            "required": false,
+            "source": "user",
+            "reflection": false,
+            "value": {
+              "type": "ref",
+              "content": {
+                "ref_node_id": "node_start",
+                "ref_var_name": "query",
+                "source": "system"
+              }
+            }
+          }
+        ],
+        "outputs": [
+          {
+            "name": "result",
+            "type": "string",
+            "description": "输出的分类分支名",
+            "required": false,
+            "source": "system",
+            "reflection": false,
+            "value": {
+              "type": "generated",
+              "content": "",
+              "hint": ""
+            }
+          }
+        ],
+        "configs": {
+          "prompt": "你是一个功能分类器，你可以根据用户的请求提问，和相应的功能类别描述，选择正确的功能帮助用户解决问题。\n如果提问涉及公司办公政策或相关知识的查询或解释，选择 办公知识问答 功能；\n如果提问涉及会议室预定、会议室相关资源查询，选择 会议室预定 功能；\n如果提问涉及特定人员的查找、联系信息或身份确认，选择 查人找人 功能；\n如果提问涉及文字或语音内容的翻译需求，无论是语言之间的转换还是文字的解释，选择 翻译 功能；\n如果提问都不涉及以上需求，选择 拒答 功能。",
+          "llm": {
+            "temperature": 0.5,
+            "top_p": 0.5,
+            "model": {
+              "model_name": "xw-n1-128k-402-部署-121201",
+              "model_type": "ei_pangu",
+              "model_deployment_id": "6acb6f59-0f29-4a76-aada-431cb2246208"
+            }
+          }
+        },
+        "branches": [
+          {
+            "id": "branch_1",
+            "configs": {
+              "category": "会议室预订"
+            }
+          },
+          {
+            "id": "branch_2",
+            "configs": {
+              "category": "办公知识问答"
+            }
+          },
+          {
+            "id": "branch_3",
+            "configs": {
+              "category": "翻译"
+            }
+          },
+          {
+            "id": "branch_4",
+            "configs": {
+              "category": "查人找人"
+            }
+          },
+          {
+            "id": "branch_5",
+            "configs": {
+              "category": "当用户提及需要定制化优惠券的金额时，或明确指定使用券额预估模型建群时，选择该分类，例如：发起一个领券的活动、地铁出行（促三方支付）享受优惠券的活动"
+            }
+          },
+          {
+            "id": "branch_6",
+            "configs": {
+              "category": "去医院"
+            }
+          }
+        ]
+    }
+```
+
 ### 节点：`Message`
 
-"Message"节点支持返回ModelArts工作流执行过程中间结果。
+"Message"节点支持返回执行过程中间结果。
 
 **属性：**
 
@@ -324,9 +630,15 @@
 - `configs`(Object):
   -  `"template"`(String): ""
 
+**参考样例**
+
+```python
+
+```
+
 ### 节点：`Plugin`
 
-"Plugin"节点提供已构造好的插件能力，用于扩展ModelArts工作流的能力，从而实现更复杂的业务场景。
+"Plugin"节点提供已构造好的插件能力。
 
 **属性：**
 
@@ -370,9 +682,74 @@
 - `configs`(Object):
   -  `"id"`(String): ""
 
+**参考样例**
+
+```python
+	{
+        "id": "node_1733477873270",
+        "name": "translate",
+        "type": "Plugin",
+        "inputs": [
+          {
+            "name": "text",
+            "description": "待翻译的文本，标点符号都是中文标点符号",
+            "required": true,
+            "source": "user",
+            "reflection": false,
+            "value": {
+              "type": "ref",
+              "content": {
+                "ref_node_id": "node_1733477117854",
+                "ref_var_name": "text",
+                "source": "user"
+              }
+            }
+          }
+        ],
+        "outputs": [
+          {
+            "name": "errCode",
+            "type": "string",
+            "description": "errCode",
+            "required": true,
+            "source": "user",
+            "reflection": false,
+            "value": {
+              "type": "generated"
+            }
+          },
+          {
+            "name": "errMessage",
+            "type": "string",
+            "description": "errMessage",
+            "required": true,
+            "source": "user",
+            "reflection": false,
+            "value": {
+              "type": "generated"
+            }
+          },
+          {
+            "name": "result",
+            "type": "string",
+            "description": "result",
+            "required": true,
+            "source": "user",
+            "reflection": false,
+            "value": {
+              "type": "generated"
+            }
+          }
+        ],
+        "configs": {
+          "id": "5"
+        }
+    }
+```
+
 ### 节点：`TaskFlow`
 
-"TaskFlow"节点提供ModelArts工作流任务规划能力。
+"TaskFlow"节点提供任务规划能力。
 
 **属性：**
 
@@ -420,9 +797,15 @@
     -  `"name"`(String): "",
     -  `"description"`(String): ""
 
+**参考样例**
+
+```python
+
+```
+
 ### 节点：`End`
 
-"End"节点定义一个ModelArts工作流程结束的最终输出内容。每一个工作流在完整执行后都需要至少一个结束节点，用于输出完整执行的最终结果。
+"End"节点定义一个工作流程结束的最终输出内容。每一个工作流在完整执行后都需要至少一个结束节点，用于输出完整执行的最终结果。
 结束节点为流程终止节点，后面无法再添加其他节点，工作流应用中只有运行到结束节点才会输出执行结果。若流程中出现条件分叉，则需要定义多个结束节点。
 结束节点需要声明一个或多个输出变量，声明时可以引用任意上游节点的输出变量。
 
@@ -459,6 +842,110 @@
   -  `"response_template"`(String): "",
   -  `"response_mode"`(String): "directResponse"
 
+**参考样例**
+
+```python
+	{
+        "id": "node_end",
+        "name": "结束",
+        "type": "End",
+        "inputs": [
+          {
+            "name": "meetion_room",
+            "description": "",
+            "required": false,
+            "source": "user",
+            "reflection": false,
+            "value": {
+              "type": "ref",
+              "content": {
+                "ref_node_id": "node_1733477335403",
+                "ref_var_name": "result",
+                "source": "user"
+              }
+            }
+          },
+          {
+            "name": "office",
+            "description": "",
+            "required": false,
+            "source": "user",
+            "reflection": false,
+            "value": {
+              "type": "ref",
+              "content": {
+                "ref_node_id": "node_1733477886970",
+                "ref_var_name": "result",
+                "source": "user"
+              }
+            }
+          },
+          {
+            "name": "translate",
+            "description": "",
+            "required": false,
+            "source": "user",
+            "reflection": false,
+            "value": {
+              "type": "ref",
+              "content": {
+                "ref_node_id": "node_1733477873270",
+                "ref_var_name": "result",
+                "source": "user"
+              }
+            }
+          },
+          {
+            "name": "find_people",
+            "description": "",
+            "required": false,
+            "source": "user",
+            "reflection": false,
+            "value": {
+              "type": "ref",
+              "content": {
+                "ref_node_id": "node_1733477983207",
+                "ref_var_name": "key1",
+                "source": "user"
+              }
+            }
+          },
+          {
+            "name": "llm",
+            "description": "",
+            "required": false,
+            "source": "user",
+            "reflection": false,
+            "value": {
+              "type": "ref",
+              "content": {
+                "ref_node_id": "node_default_llm_chain",
+                "ref_var_name": "raw_output",
+                "source": "user"
+              }
+            }
+          }
+        ],
+        "outputs": [
+          {
+            "name": "response_content",
+            "type": "string",
+            "description": "最终输出",
+            "required": true,
+            "source": "system",
+            "reflection": false,
+            "value": {
+              "type": "generated"
+            }
+          }
+        ],
+        "configs": {
+          "is_stream_out": "true",
+          "response_template": "{{meetion_room}}{{office}}{{translate}}{{find_people}}{{llm}}",
+          "response_mode": "directResponse"
+        }
+    }
+```
 
 ## 编排节点
 ModelArts工作流内的节点支持串行和并行的连接模式。
