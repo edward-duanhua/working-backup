@@ -975,11 +975,11 @@ ModelArts工作流内的节点支持串行和并行的连接模式。
 ```
 
 ## ModelArts工作流配置文件
-ModelArts工作流配置文件是未格式化jsonl文件，该文件包含5个关键字，分别是`"dsl"`、`"metadata"`、`"plugins"`、`"import_type"`、`"sub_workflows"`。
--  `"dsl"`是一个`Object`类型，其中包括6个关键字，分别是`"id"`、`"name"`、`"description"`、`"nodes"`、`"edges"`、`"layouts"`。
-- `"metadata"`是一个`Object`类型，其中包括21个关键字，分别是`"id"`、`"name"`、`"description"`、`"code"`、`"avatar"`、`"status"`、`"visibility"`、`"deleted"`、`"dsl_path"`、`"ir_path"`、`"created_at"`、`"updated_at"`、`"created_by"`、`"creator_id"`、`"updated_by"`、`"updater_id"`、`"project_id"`、`"domain_id"`、`"deploy_wf_version"`、`"workflow_type"`。
-- `"plugins"`是一个`Array`类型，其中每个item都是一个`Object`对象，包括16个关键字，分别是`"tool_id"`、`"project_id"`、`"tool_display_name"`、`"tool_desc"`、`"icon"`、`"request_info"`、`"auth_info"`、`"input_schema"`、`"output_schema"`、`"is_input_list"`、`"is_output_list"`、`"type"`、`"creator"`、`"creator_id"`、`"created_on"`、`"updated_on"`。注意，`"dsl"`中的`"nodes"`有几个plugins节点，，这里就有对应数目的item，且这里的`"tool_display_name"`必须和`"dsl"`中的`"nodes"`里面的`"Plugin"`类型的节点中的`"name"`一一对应上。
-- `"import_type"`是一个`String`类型的对象，默认取值为`"workflow"`
+ModelArts工作流配置文件是未格式化jsonl文件，该文件包含**5个必需的关键字**，分别是`"dsl"`、`"metadata"`、`"plugins"`、`"import_type"`、`"sub_workflows"`。
+-  `"dsl"`是一个`Object`类型，其中包括**6个必需的关键字**，分别是`"id"`、`"name"`、`"description"`、`"nodes"`、`"edges"`、`"layouts"`。
+- `"metadata"`是一个`Object`类型，其中包括**21个必需的关键字**，分别是`"id"`、`"name"`、`"description"`、`"code"`、`"avatar"`、`"status"`、`"visibility"`、`"deleted"`、`"dsl_path"`、`"ir_path"`、`"created_at"`、`"updated_at"`、`"created_by"`、`"creator_id"`、`"updated_by"`、`"updater_id"`、`"project_id"`、`"domain_id"`、`"deploy_wf_version"`、`"workflow_type"`。
+- `"plugins"`是一个`Array`类型，其中每个item都是一个`Object`对象，包括**16个必需的关键字**，分别是`"tool_id"`、`"project_id"`、`"tool_display_name"`、`"tool_desc"`、`"icon"`、`"request_info"`、`"auth_info"`、`"input_schema"`、`"output_schema"`、`"is_input_list"`、`"is_output_list"`、`"type"`、`"creator"`、`"creator_id"`、`"created_on"`、`"updated_on"`。注意，`"dsl"`中的`"nodes"`有几个plugins节点，，这里就有对应数目的item，且这里的`"tool_display_name"`必须和`"dsl"`中的`"nodes"`里面的`"Plugin"`类型的节点中的`"name"`一一对应上。
+- `"import_type"`是一个`String`类型的对象，默认值为`"workflow"`
 - `"sub_workflows"`是一个`Array`类型的对象，默认值为`[]`
 
 下面是一个配置文件的参考格式样例：
