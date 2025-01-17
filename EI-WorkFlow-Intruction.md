@@ -338,9 +338,9 @@ ModelArts工作流的核心节点请查看 《节点说明》。
         "outputs": [
           {
             "name": "key1",
-            "type": "string",
+            "type": "string",   // 输出参数的类型，可选String、Integer、Number、Boolean
             "description": "输出",
-            "required": false,
+            "required": false,   // 选择当前输出参数是否必填
             "source": "user",
             "reflection": false,
             "value": {
@@ -407,10 +407,10 @@ ModelArts工作流的核心节点请查看 《节点说明》。
             "configs": {
               "logic": "and",
               "conditions": [
-                {
-                  "operator": "eq",
+                {\
+                  "operator": "eq",   //条件表达式中间部分，当前支持的比较条件有：equal、not equal、contain、not contain
                   "left": {
-                    "name": "",
+                    "name": "",   // 条件表达式左边部分，需要选择来自前序节点的输出参数
                     "description": "",
                     "required": false,
                     "source": "user",
@@ -685,13 +685,13 @@ ModelArts工作流的核心节点请查看 《节点说明》。
 - `"type"` (String): "Plugin"，
 - `"inputs"`(Array):
   -  `_`(Object):
-     -  `"name"` (String): ""，
+     -  `"name"` (String): ""，   // 从插件元信息中导入，用户无需手动添加
      -  `"description"`(String): ""，
      -  `"required"`(Boolean): true，
      -  `"source"`(String): "user"，
      -  `"reflection"`(Boolean): false，
      -  `"value"`(Object):
-        - `"type"`(String): "ref",
+        - `"type"`(String): "ref",   // 支持“引用”和“输入”两种类型
         - `"content"`(Object):
            - `"ref_node_id"`(String): "",
            - `"ref_var_name"`(String): "",
@@ -708,7 +708,7 @@ ModelArts工作流的核心节点请查看 《节点说明》。
            - `"ref_node_id"`(String): "",
            - `"ref_var_name"`(String): "",
            - `"source"`(String): "user"
-- `"outputs"`(Array):
+- `"outputs"`(Array):   // 输出参数所有信息从插件元信息中导入，用户无需手动添加
   -  `_`(Object):
      -  `"name"` (String): ""，
      -  `"description"`(String): ""，
