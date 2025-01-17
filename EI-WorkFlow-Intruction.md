@@ -79,13 +79,13 @@ ModelArts工作流的核心节点请查看 《节点说明》。
 - `"type"` (String): "LLM"，
 - `"inputs"`(Array):
   -  `_`(Object):
-     -  `"name"` (String): "query"，   //参数的名称长度必须大于等于1个字符，并且字符只允许为下面三种类型字母（A-Z或a-z）、数字（0-9）、特殊字符：_
+     -  `"name"` (String): "query"，   // 参数的名称长度必须大于等于1个字符，并且字符只允许为下面三种类型字母（A-Z或a-z）、数字（0-9）、特殊字符：_
      -  `"description"`(String): ""，
      -  `"required"`(Boolean): false，
      -  `"source"`(String): "user"，
      -  `"reflection"`(Boolean): false，
      -  `"value"`(Object):    
-        - `"type"`(String): "ref",   //支持“引用”和“输入”两种类型,前者支持用户选择工作流中已包含的前置节点的输出变量值；后者支持用户自定义取值
+        - `"type"`(String): "ref",   // 支持“引用”和“输入”两种类型,前者支持用户选择工作流中已包含的前置节点的输出变量值；后者支持用户自定义取值
         - `"content"`(Object):
            - `"ref_node_id"`(String): "node_start",
            - `"ref_var_name"`(String): "query",
@@ -93,7 +93,7 @@ ModelArts工作流的核心节点请查看 《节点说明》。
 - `"outputs"`(Array):
   -  `_`(Object):
      -  `"name"` (String): "请输入"，
-     -  `"type"`(String): "string"，   //输出参数的类型，可选String、Integer、Number、Boolean
+     -  `"type"`(String): "string"，   // 输出参数的类型，可选String、Integer、Number、Boolean
      -  `"description"`(String): "请输入"，
      -  `"required"`(Boolean): false，
      -  `"source"`(String): "user"，
@@ -102,7 +102,7 @@ ModelArts工作流的核心节点请查看 《节点说明》。
         - `"type"`(String): "generated"
 - `configs`(Object):
   -  `"top_p"` (Number): 0.5，
-  -  `"template_content"`(String): "{{query}}"，   //写提示词时，支持使用{{variable}}格式引用当前节点输入参数中已定义好的参数
+  -  `"template_content"`(String): "{{query}}"，   // 写提示词时，支持使用{{variable}}格式引用当前节点输入参数中已定义好的参数
   -  `"temperature"`(Number): 0.5，
   -  `"model"`(Object): 
      -  `"model_name"`(String): ""，
@@ -172,12 +172,12 @@ ModelArts工作流的核心节点请查看 《节点说明》。
 - `"type"` (String): "Questioner"，
 - `"inputs"`(Array):
   -  `_`(Object):
-     -  `"name"` (String): "提问器"，
+     -  `"name"` (String): ""，   // 由开发者自定义，可以通过双花括号形式在后续“问题配置”中被参数“问题”引用
      -  `"description"`(String): ""，
      -  `"required"`(Boolean): false，
      -  `"source"`(String): "user"，
      -  `"reflection"`(Boolean): false，
-     -  `"value"`(Object):
+     -  `"value"`(Object):   // 支持“引用”和“输入”两种类型。
         - `"type"`(String): "ref",
         - `"content"`(Object):
            - `"ref_node_id"`(String): "node_start",
@@ -187,7 +187,7 @@ ModelArts工作流的核心节点请查看 《节点说明》。
   -  `_`(Object):
      -  `"name"` (String): ""，
      -  `"cn_name"`(String): ""，
-     -  `"type"`(String): "string"，
+     -  `"type"`(String): "string"，   // 输出参数的类型，可选String、Integer、Number、Boolean
      -  `"description"`(String): "用户最近一轮对话输入"，
      -  `"required"`(Boolean): false，
      -  `"source"`(String): "system"，
@@ -223,11 +223,11 @@ ModelArts工作流的核心节点请查看 《节点说明》。
 - `configs`(Object):
   -  `"top_p"` (Number): 0.5，
   -  `"extract_fields_from_response"`(Boolean): true,
-  -  `"with_chat_history"`(Boolean): true,
+  -  `"with_chat_history"`(Boolean): true,   // 开启对话历史后，当前工作流的上下文会带入提问器。
   -  `"extra_prompt_for_fields_extraction"`(String): "如果用户发起修改，只改用户修改的变量，不修改的保持原样",
   -  `"temperature"`(Number): 0.2，
-  -  `"max_response"`(Number): 3,
-  -  `"question_content"`(String): "",
+  -  `"max_response"`(Number): 3,   // 该参数指在与用户交互过程中，模型能够持续进行对话而不丧失上下文或性能的最大回合数
+  -  `"question_content"`(String): "",   // 该参数将在对话框中原样呈现给用户。如未配置此处，将由大模型根据输出参数描述，自动生成包含所有问题关键词的一个问题
   -  `"model"`(Object): 
      -  `"model_name"`(String): ""，
      -  `"model_type"`(String): ""，
@@ -453,13 +453,13 @@ ModelArts工作流的核心节点请查看 《节点说明》。
 - `"type"` (String): "IntentDetection"，
 - `"inputs"`(Array):
   - `_`(Object):
-    - `"name"`(String): "input",
+    - `"name"`(String): "input",   // 参数名称：默认名称input，为固定值，不可编辑
     - `"description"`(String): "",
     - `"required"`(Boolean): false,
     - `"source"`(String): "user",
     - `"reflection"`(Boolean): false
     - `"value"`(Object):
-      - `"type"`(String): "ref",
+      - `"type"`(String): "ref",   // 支持“引用”和“输入”两种类型,前者支持用户选择工作流中已包含的前置节点的输出变量值；后者支持用户自定义取值
       - `"content"`(Object):
         - `"ref_node_id"`(String): "node_start",
         - `"ref_var_name"`(String): "query",
@@ -483,12 +483,12 @@ ModelArts工作流的核心节点请查看 《节点说明》。
       -  `"model_name"`(String): ""，
       -  `"model_type"`(String): ""，
       -  `"model_deployment_id"`(Sting): ""
-  - `"prompt"`(String): ""
+  - `"prompt"`(String): ""   // 高级配置项供进阶开发者修改提示词，如果不配置将会使用系统默认值。提示词的撰写可能影响到意图识别节点的准确性。
 - `"branches"`(Array):
   - `_`(Object):
     - `"id"`(String): "branch_1",
     - `"configs"`(Object):
-      - `"category"`(String): ""
+      - `"category"`(String): ""   // 在意图输入框中输入意图描述信息，描述信息为针对该类别的描述语句或者关键词，也将作为大模型进行推理和分类的依据。意图数量为2 ~ 5个
   - `_`(Object):
     - `"id"`(String): "branch_2",
     - `"configs"`(Object):
