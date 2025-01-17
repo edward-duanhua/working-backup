@@ -79,13 +79,13 @@ ModelArts工作流的核心节点请查看 《节点说明》。
 - `"type"` (String): "LLM"，
 - `"inputs"`(Array):
   -  `_`(Object):
-     -  `"name"` (String): "query"，
+     -  `"name"` (String): "query"，   //参数的名称长度必须大于等于1个字符，并且字符只允许为下面三种类型字母（A-Z或a-z）、数字（0-9）、特殊字符：_
      -  `"description"`(String): ""，
      -  `"required"`(Boolean): false，
      -  `"source"`(String): "user"，
      -  `"reflection"`(Boolean): false，
-     -  `"value"`(Object):
-        - `"type"`(String): "ref",
+     -  `"value"`(Object):    
+        - `"type"`(String): "ref",   //支持“引用”和“输入”两种类型,前者支持用户选择工作流中已包含的前置节点的输出变量值；后者支持用户自定义取值
         - `"content"`(Object):
            - `"ref_node_id"`(String): "node_start",
            - `"ref_var_name"`(String): "query",
@@ -93,7 +93,7 @@ ModelArts工作流的核心节点请查看 《节点说明》。
 - `"outputs"`(Array):
   -  `_`(Object):
      -  `"name"` (String): "请输入"，
-     -  `"type"`(String): "string"，
+     -  `"type"`(String): "string"，   //输出参数的类型，可选String、Integer、Number、Boolean
      -  `"description"`(String): "请输入"，
      -  `"required"`(Boolean): false，
      -  `"source"`(String): "user"，
@@ -102,7 +102,7 @@ ModelArts工作流的核心节点请查看 《节点说明》。
         - `"type"`(String): "generated"
 - `configs`(Object):
   -  `"top_p"` (Number): 0.5，
-  -  `"template_content"`(String): "{{query}}"，
+  -  `"template_content"`(String): "{{query}}"，   //写提示词时，支持使用{{variable}}格式引用当前节点输入参数中已定义好的参数
   -  `"temperature"`(Number): 0.5，
   -  `"model"`(Object): 
      -  `"model_name"`(String): ""，
