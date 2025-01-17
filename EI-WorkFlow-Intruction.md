@@ -1030,7 +1030,7 @@ ModelArts工作流配置文件是**未格式化jsonl文件**，该文件包含**
   - `"nodes"`关键字是一个Array类型的**必需字段**，其中的每1个item都对应上面《节点说明》中介绍的某个工作流节点。
   - `"edges"`关键字是一个Array类型的**必需字段**，其中的每1个item都对应2个工作流节点的连接关系，详细格式参见上面《节点间连接》描述。
   - `"layouts"`关键字是一个Array类型的**必需字段**，其中的每1个item表示`"nodes"`中节点在ModelArts工作流平台画板中的位置，格式如下：
-    - 、、、python
+    、、、python
       "layouts": {
      	"node_start": {
      		"x": 210,
@@ -1051,21 +1051,21 @@ ModelArts工作流配置文件是**未格式化jsonl文件**，该文件包含**
       }
       ```
 - `"metadata"`是一个`Object`类型的**必需字段**，其中包括**21个必需的关键字**，分别是`"id"`、`"name"`、`"description"`、`"code"`、`"avatar"`、`"status"`、`"visibility"`、`"deleted"`、`"dsl_path"`、`"ir_path"`、`"created_at"`、`"updated_at"`、`"created_by"`、`"creator_id"`、`"updated_by"`、`"updater_id"`、`"project_id"`、`"domain_id"`、`"deploy_wf_version"`、`"workflow_type"`。
-  - `"id"`是一个`String`类型的**必需字段**，默认值必须与`"dsl"`中的`"id"`的取值完全一致。
-  - `"name"`是一个`String`类型的**必需字段**，默认值必须与`"dsl"`中的`"name"`的取值完全一致。
-  - `"code"`是一个`String`类型的**必需字段**，其内容只能包含英文字母和下划线，且不能以下划线开头或结尾。
-  - `"avatar"`是一个`String`类型的**必需字段**，其内容是工作流图标的BASE64编码信息。
-  - `"status"`是一个`String`类型的**必需字段**，默认值为"draft"。 
-  - `"visibility"`是一个`String`类型的**必需字段**，默认值为"project"。 
-  - `"deleted"`是一个`Number`类型的**必需字段**，默认值为0。 
-  - `"dsl_path"`是一个`String`类型的**必需字段**，其内容格式为5个子字符串拼接，分别是"workflow/flow/" 、`"id"`的值 、"/"、`"id"`的值、".json"，例如 "workflow/flow/a69be318-c262-491b-b58a-a3558c21a517/a69be318-c262-491b-b58a-a3558c21a517.json"。
-  - `"ir_path"`是一个`String`类型的**必需字段**，其内容格式为5个子字符串拼接，分别是"workflow/ir/" 、`"id"`的值 、"/"、`"id"`的值、".json"，例如 "workflow/ir/a69be318-c262-491b-b58a-a3558c21a517/a69be318-c262-491b-b58a-a3558c21a517.json"。 
-  - `"creator_id"`是一个`String`类型的**必需字段**，取值为小写字母和数字组合的、长度为32的字符串，要求唯一性。 
-  - `"updater_id"`是一个`String`类型的**必需字段**，取值为小写字母和数字组合的、长度为32的字符串，缺省取值和`"creator_id"`相同。 
-  - `"project_id"`是一个`String`类型的**必需字段**，取值为小写字母和数字组合的、长度为32的字符串"。 
-  - `"domain_id"`是一个`String`类型的**必需字段**，取值为小写字母和数字组合的、长度为32的字符串"。 
-  - `"deploy_wf_version"`是一个`Number`类型的**必需字段**，取值为长度13的数字组合。 
-  - `"workflow_type"`是一个`String`类型的**必需字段**，默认值为"chat"，可选取值"task"。 
+   - `"id"`是一个`String`类型的**必需字段**，默认值必须与`"dsl"`中的`"id"`的取值完全一致。
+   - `"name"`是一个`String`类型的**必需字段**，默认值必须与`"dsl"`中的`"name"`的取值完全一致。
+   - `"code"`是一个`String`类型的**必需字段**，其内容只能包含英文字母和下划线，且不能以下划线开头或结尾。
+   - `"avatar"`是一个`String`类型的**必需字段**，其内容是工作流图标的BASE64编码信息。
+   - `"status"`是一个`String`类型的**必需字段**，默认值为"draft"。 
+   - `"visibility"`是一个`String`类型的**必需字段**，默认值为"project"。 
+   - `"deleted"`是一个`Number`类型的**必需字段**，默认值为0。 
+   - `"dsl_path"`是一个`String`类型的**必需字段**，其内容格式为5个子字符串拼接，分别是"workflow/flow/" 、`"id"`的值 、"/"、`"id"`的值、".json"，例如 "workflow/flow/a69be318-c262-491b-b58a-a3558c21a517/a69be318-c262-491b-b58a-a3558c21a517.json"。
+   - `"ir_path"`是一个`String`类型的**必需字段**，其内容格式为5个子字符串拼接，分别是"workflow/ir/" 、`"id"`的值 、"/"、`"id"`的值、".json"，例如 "workflow/ir/a69be318-c262-491b-b58a-a3558c21a517/a69be318-c262-491b-b58a-a3558c21a517.json"。 
+   - `"creator_id"`是一个`String`类型的**必需字段**，取值为小写字母和数字组合的、长度为32的字符串，要求唯一性。 
+   - `"updater_id"`是一个`String`类型的**必需字段**，取值为小写字母和数字组合的、长度为32的字符串，缺省取值和`"creator_id"`相同。 
+   - `"project_id"`是一个`String`类型的**必需字段**，取值为小写字母和数字组合的、长度为32的字符串"。 
+   - `"domain_id"`是一个`String`类型的**必需字段**，取值为小写字母和数字组合的、长度为32的字符串"。 
+   - `"deploy_wf_version"`是一个`Number`类型的**必需字段**，取值为长度13的数字组合。 
+   - `"workflow_type"`是一个`String`类型的**必需字段**，默认值为"chat"，可选取值"task"。 
 - `"plugins"`是一个`Array`类型的**必需字段**，如果`"dsl"中的`"nodes"没有plugins类型的节点，则该字段为[],否则其中每个item都是一个`Object`对象，包括**16个必需的关键字**，分别是`"tool_id"`、`"project_id"`、`"tool_display_name"`、`"tool_desc"`、`"icon"`、`"request_info"`、`"auth_info"`、`"input_schema"`、`"output_schema"`、`"is_input_list"`、`"is_output_list"`、`"type"`、`"creator"`、`"creator_id"`、`"created_on"`、`"updated_on"`。注意，`"dsl"`中的`"nodes"`有几个plugins节点，，这里就有对应数目的item，且这里的`"tool_display_name"`必须和`"dsl"`中的`"nodes"`里面的`"Plugin"`类型的节点中的`"name"`一一对应上。
   - `"project_id"`是一个`String`类型的字段，如果`"dsl"中的`"nodes"有plugins类型的节点，则该字段为``**必需字段**，取值为小写字母和数字组合的、长度为32的字符串，缺省取值和`"metadata"`中的`"project_id"`相同。
 - `"import_type"`是一个`String`类型的**必需字段**，默认值为`"workflow"`
