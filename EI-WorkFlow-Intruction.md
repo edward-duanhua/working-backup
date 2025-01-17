@@ -1030,7 +1030,7 @@ ModelArts工作流配置文件是**未格式化jsonl文件**，该文件包含**
   - `"nodes"`关键字是一个Array类型的**必需字段**，其中的每1个item都对应上面《节点说明》中介绍的某个工作流节点。
   - `"edges"`关键字是一个Array类型的**必需字段**，其中的每1个item都对应2个工作流节点的连接关系，详细格式参见上面《节点间连接》描述。
   - `"layouts"`关键字是一个Array类型的**必需字段**，其中的每1个item表示`"nodes"`中节点在ModelArts工作流平台画板中的位置，格式如下：
-    、、、python
+    ```python
       "layouts": {
      	"node_start": {
      		"x": 210,
@@ -1049,7 +1049,7 @@ ModelArts工作流配置文件是**未格式化jsonl文件**，该文件包含**
      		"y": 922.8333587646484
      	}
       }
-      ```
+    ```
 - `"metadata"`是一个`Object`类型的**必需字段**，其中包括**21个必需的关键字**，分别是`"id"`、`"name"`、`"description"`、`"code"`、`"avatar"`、`"status"`、`"visibility"`、`"deleted"`、`"dsl_path"`、`"ir_path"`、`"created_at"`、`"updated_at"`、`"created_by"`、`"creator_id"`、`"updated_by"`、`"updater_id"`、`"project_id"`、`"domain_id"`、`"deploy_wf_version"`、`"workflow_type"`。
    - `"id"`是一个`String`类型的**必需字段**，默认值必须与`"dsl"`中的`"id"`的取值完全一致。
    - `"name"`是一个`String`类型的**必需字段**，默认值必须与`"dsl"`中的`"name"`的取值完全一致。
