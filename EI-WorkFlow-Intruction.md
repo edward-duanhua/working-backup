@@ -626,7 +626,7 @@ ModelArts工作流的核心节点请查看 《节点说明》。
         - `"content"`(String): "",
         - `"hint"`(String): ""
 - `configs`(Object):
-  -  `"template"`(String): ""
+  -  `"template"`(String): ""   // 可撰写指定的回复信息，并以{{参数名称}}的形式插入变量。
 
 **"Message"节点参考样例**
 
@@ -877,7 +877,7 @@ ModelArts工作流的核心节点请查看 《节点说明》。
         - `"type"`(String): "generated"
 - `configs`(Object):
   -  `"is_stream_out"` (String): "true"，
-  -  `"response_template"`(String): "{{result}}",
+  -  `"response_template"`(String): "{{result}}",   // 可撰写指定的回复信息，并以{{参数名称}}的形式插入变量。
   -  `"response_mode"`(String): "directResponse"
 
 **"End"节点参考样例**
