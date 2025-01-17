@@ -23,7 +23,7 @@ ModelArts工作流的核心节点请查看 《节点说明》。
 
 - 在有些场景下`"inputs"`和`"outputs"`中都可能包含多个Object对象
 
-**属性：**
+**"开始" 节点属性：**
 
 - `"id"` (String): ""，
 - `"name"` (String): "开始"，
@@ -42,7 +42,7 @@ ModelArts工作流的核心节点请查看 《节点说明》。
         - `"content"`(String): "",
         - `"hint"`(String): "用户输入"
 
-**参考样例**
+**"开始" 节点参考样例**
 
 ```python
 	{
@@ -72,7 +72,7 @@ ModelArts工作流的核心节点请查看 《节点说明》。
 
 "LLM"节点调用大语言模型的能力，处理用户输入的信息（自然语言、上传的文件或图片），给出有效的回应信息。
 
-**属性：**
+**"LLM"节点属性：**
 
 - `"id"` (String): ""，
 - `"name"` (String): "大模型"，
@@ -110,7 +110,7 @@ ModelArts工作流的核心节点请查看 《节点说明》。
      -  `"model_deployment_id"`(String): ""
   - `"enable_history"`(Boolean): true
 
-**参考样例**
+**"LLM"节点参考样例**
 
 ```python
 	{
@@ -165,7 +165,7 @@ ModelArts工作流的核心节点请查看 《节点说明》。
 
 "Questioner"节点提供与用户简单交互的能力。
 
-**属性：**
+**"Questioner"节点属性：**
 
 - `"id"` (String): ""，
 - `"name"` (String): ""，
@@ -234,7 +234,7 @@ ModelArts工作流的核心节点请查看 《节点说明》。
      -  `"model_deployment_id"`(Sting): ""
 
 
-**参考样例**
+**"Questioner"节点参考样例**
 
 ```python
 	{
@@ -296,7 +296,7 @@ ModelArts工作流的核心节点请查看 《节点说明》。
 "Code"节点支持运行 Python 代码以在ModelArts工作流程中执行数据转换。它可以简化你的工作流程，适用于Arithmetic、JSON transform、文本处理等情景。
 该节点极大地增强了开发人员的灵活性，使他们能够在ModelArts工作流程中嵌入自定义的 Python 脚本，并以预设节点无法达到的方式操作变量。
 
-**属性：**
+**"Code"节点属性：**
 
 - `"id"` (String): ""，
 - `"name"` (String): "代码"，
@@ -324,7 +324,7 @@ ModelArts工作流的核心节点请查看 《节点说明》。
 - `"configs"`(Object):
   -  `"code"` (String): ""
 
-**参考样例**
+**"Code"节点参考样例**
 
 ```python
 	{
@@ -355,7 +355,7 @@ ModelArts工作流的核心节点请查看 《节点说明》。
 
 "Branch"节点用于设置ModelArts工作流中的分支流程，根据 If/else/elif 条件将 Chatflow / Workflow 流程拆分成多个分支。
 
-**属性：**
+**"Branch"节点属性：**
 
 - `"id"` (String): ""，
 - `"name"` (String): "判断"，
@@ -391,7 +391,7 @@ ModelArts工作流的核心节点请查看 《节点说明》。
    - _(Object):
      - `"id"`(String): "default"
 
-**参考样例**
+**"Branch"节点参考样例**
 
 ```python
 	{
@@ -446,7 +446,7 @@ ModelArts工作流的核心节点请查看 《节点说明》。
 
 "IntentDetection"节点通过定义分类描述，问题分类器能够根据用户输入，使用 LLM 推理与之相匹配的分类并输出分类结果，向下游节点提供更加精确的信息。
 
-**属性：**
+**"IntentDetection"节点属性：**
 
 - `"id"` (String): ""，
 - `"name"` (String): "意图分类"，
@@ -495,7 +495,7 @@ ModelArts工作流的核心节点请查看 《节点说明》。
       - `"category"`(String): ""
 
 
-**参考样例**
+**"IntentDetection"节点参考样例**
 
 ```python
 	{
@@ -591,7 +591,7 @@ ModelArts工作流的核心节点请查看 《节点说明》。
 
 "Message"节点支持返回执行过程中间结果。
 
-**属性：**
+**"Message"节点属性：**
 
 - `"id"` (String): ""，
 - `"name"` (String): "消息"，
@@ -625,7 +625,7 @@ ModelArts工作流的核心节点请查看 《节点说明》。
 - `configs`(Object):
   -  `"template"`(String): ""
 
-**参考样例**
+**"Message"节点参考样例**
 
 ```python
 {
@@ -675,7 +675,7 @@ ModelArts工作流的核心节点请查看 《节点说明》。
 
 "Plugin"节点提供已构造好的插件能力。
 
-**属性：**
+**"Plugin"节点属性：**
 
 - `"id"` (String): ""，
 - `"name"` (String): ""，
@@ -717,7 +717,7 @@ ModelArts工作流的核心节点请查看 《节点说明》。
 - `configs`(Object):
   -  `"id"`(String): ""
 
-**参考样例**
+**"Plugin"节点参考样例**
 
 ```python
 	{
@@ -786,7 +786,7 @@ ModelArts工作流的核心节点请查看 《节点说明》。
 
 "TaskFlow"节点提供任务规划能力。
 
-**属性：**
+**"TaskFlow"节点属性：**
 
 - `"id"` (String): ""，
 - `"name"` (String): ""，
@@ -832,7 +832,7 @@ ModelArts工作流的核心节点请查看 《节点说明》。
     -  `"name"`(String): "",
     -  `"description"`(String): ""
 
-**参考样例**
+**"TaskFlow"节点参考样例**
 
 ```python
 
@@ -844,14 +844,14 @@ ModelArts工作流的核心节点请查看 《节点说明》。
 结束节点为流程终止节点，后面无法再添加其他节点，工作流应用中只有运行到结束节点才会输出执行结果。若流程中出现条件分叉，则需要定义多个结束节点。
 结束节点需要声明一个或多个输出变量，声明时可以引用任意上游节点的输出变量。
 
-**属性：**
+**"End"节点属性：**
 
 - `"id"` (String): ""，
 - `"name"` (String): "结束"，
 - `"type"` (String): "End"，
 - `"inputs"`(Array):
   -  `_`(Object):
-     -  `"name"` (String): ""，
+     -  `"name"` (String): "result"，
      -  `"description"`(String): ""，
      -  `"required"`(Boolean): false，
      -  `"source"`(String): "user"，
@@ -874,10 +874,10 @@ ModelArts工作流的核心节点请查看 《节点说明》。
         - `"type"`(String): "generated"
 - `configs`(Object):
   -  `"is_stream_out"` (String): "true"，
-  -  `"response_template"`(String): "",
+  -  `"response_template"`(String): "{{result}}",
   -  `"response_mode"`(String): "directResponse"
 
-**参考样例**
+**"End"节点参考样例**
 
 ```python
 	{
