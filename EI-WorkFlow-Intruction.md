@@ -1067,6 +1067,7 @@ MA工作流配置文件是**未格式化jsonl文件**，该文件包含**5个必
    - `"deploy_wf_version"`是一个`Number`类型的**必需字段**，取值为长度13的数字组合。 
    - `"workflow_type"`是一个`String`类型的**必需字段**，默认值为"chat"，可选取值"task"。
    - 参考示例如下
+     
      ```python
 	"metadata": {
 		"id": "a3bedb198ad787708a434f7c794fb361e8fc",
