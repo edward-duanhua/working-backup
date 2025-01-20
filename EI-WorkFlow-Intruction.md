@@ -1065,7 +1065,30 @@ MA工作流配置文件是**未格式化jsonl文件**，该文件包含**5个必
    - `"project_id"`是一个`String`类型的**必需字段**，取值为小写字母和数字组合的、长度为32的字符串"。 
    - `"domain_id"`是一个`String`类型的**必需字段**，取值为小写字母和数字组合的、长度为32的字符串"。 
    - `"deploy_wf_version"`是一个`Number`类型的**必需字段**，取值为长度13的数字组合。 
-   - `"workflow_type"`是一个`String`类型的**必需字段**，默认值为"chat"，可选取值"task"。 
+   - `"workflow_type"`是一个`String`类型的**必需字段**，默认值为"chat"，可选取值"task"。
+   - 参考示例如下
+     ```python
+	"metadata": {
+		"id": "a3bedb198ad787708a434f7c794fb361e8fc",
+		"name": "办公助手_from_jiuwen",
+		"description": "办公助手_from_jiuwen",
+		"avatar": "",
+		"status": "draft",
+		"deleted": 0,
+		"dsl_path": "workflow/flow/a3bedb198ad787708a434f7c794fb361e8fc/a3bedb198ad787708a434f7c794fb361e8fc.json",
+		"ir_path": "workflow/ir/a3bedb198ad787708a434f7c794fb361e8fc/a3bedb198ad787708a434f7c794fb361e8fc.json",
+		"created_at": 1734613683088,
+		"updated_at": 1734613760646,
+		"created_by": "lx-1",
+		"creator_id": "d5b74c0f6d314137b975007d62622329",
+		"updated_by": "lx-1",
+		"updater_id": "d5b74c0f6d314137b975007d62622329",
+		"project_id": "bc2903d5916b4278a8265f8d7666c0c0",
+		"domain_id": "4bb252e66abb40d8b7aa0411da592422",
+		"deploy_wf_version": 1734599787545,
+		"workflow_type": "chat"
+	},
+     ```
 - `"plugins"`是一个`Array`类型的**必需字段**，如果`"dsl"中的`"nodes"没有plugins类型的节点，则该字段为[],否则其中每个item都是一个`Object`对象，包括**16个必需的关键字**，分别是`"tool_id"`、`"project_id"`、`"tool_display_name"`、`"tool_desc"`、`"icon"`、`"request_info"`、`"auth_info"`、`"input_schema"`、`"output_schema"`、`"is_input_list"`、`"is_output_list"`、`"type"`、`"creator"`、`"creator_id"`、`"created_on"`、`"updated_on"`。注意，`"dsl"`中的`"nodes"`有几个plugins节点，，这里就有对应数目的item，且这里的`"tool_display_name"`必须和`"dsl"`中的`"nodes"`里面的`"Plugin"`类型的节点中的`"name"`一一对应上。
   - `"project_id"`是一个`String`类型的字段，如果`"dsl"中的`"nodes"有plugins类型的节点，则该字段为``**必需字段**，取值为小写字母和数字组合的、长度为32的字符串，缺省取值和`"metadata"`中的`"project_id"`相同。
 - `"import_type"`是一个`String`类型的**必需字段**，默认值为`"workflow"`
